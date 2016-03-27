@@ -56,12 +56,13 @@ public class Grep {
         int i = 0;
 
         while(reg_i < regexp.length() && regexp.charAt(reg_i) != '*' && regexp.charAt(reg_i) != '+' && regexp.charAt(reg_i) != '[') {
+            if(i == s.length()) break;
             if(regexp.charAt(reg_i) == s.charAt(i)) {
                 reg_i++; i++;
             } else return false;
         }
         if(reg_i == regexp.length()) return true;
-        else return readRegExp(regexp.substring(reg_i), s.substring(i));
+        else return (reg_i==0 && i == 0) ? false : readRegExp(regexp.substring(reg_i), s.substring(i));
     }
 
     public static void main(String[] args) {
@@ -69,13 +70,14 @@ public class Grep {
         String word = in.nextLine();
         // * - any num of symbols, + - one or more symbols, [] - pair of symbols
 
-        while(in.hasNextLine()) {
-            String s = in.nextLine();
-            while(!s.equals("q")) {
-                if(readRegExp(word, s)) {
+        String s = "";
+        while(!s.equals("q")) {
+            s = in.nextLine();
+            for(int i = 0; i < s.length(); i++) {
+                if (readRegExp(word, s.substring(i))) {
                     System.out.println("OK");
+                    break;
                 }
-                s = in.nextLine();
             }
         }
     }
