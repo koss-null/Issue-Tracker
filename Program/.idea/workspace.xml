@@ -25,7 +25,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.6344576">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/issueTracker/Main.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="32">
@@ -47,14 +47,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Login.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Login.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/issueTracker/Logger/Login.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="278">
-                  <caret line="21" column="74" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
+                <state relative-caret-position="342">
+                  <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <marker date="1460669863566" expanded="true" signature="794:836" placeholder="select PassH... Login" />
+                    <marker date="1460671580344" expanded="true" signature="951:993" placeholder="select PassH... Login" />
                   </folding>
                 </state>
               </provider>
@@ -95,8 +95,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/issueTracker/Hasher/Coder.java" />
         <option value="$PROJECT_DIR$/src/com/issueTracker/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/issueTracker/Logger/Login.java" />
         <option value="$PROJECT_DIR$/src/com/issueTracker/Config/Config.java" />
+        <option value="$PROJECT_DIR$/src/com/issueTracker/Logger/Login.java" />
       </list>
     </option>
   </component>
@@ -659,16 +659,16 @@
       <option name="presentableId" value="Default" />
       <updated>1460584163669</updated>
       <workItem from="1460584166263" duration="5283000" />
-      <workItem from="1460665239770" duration="4568000" />
+      <workItem from="1460665239770" duration="4911000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9851000" />
+    <option name="totallyTimeSpent" value="10194000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="577" y="0" width="1351" height="1057" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -678,7 +678,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -741,7 +741,7 @@
           <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1460669863566" expanded="true" signature="794:836" placeholder="select PassH... Login" />
+            <marker date="1460671580344" expanded="true" signature="951:993" placeholder="select PassH... Login" />
           </folding>
         </state>
       </provider>
@@ -751,17 +751,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/issueTracker/Logger/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="21" column="74" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1460669863566" expanded="true" signature="794:836" placeholder="select PassH... Login" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -788,6 +777,17 @@
         <state relative-caret-position="32">
           <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/issueTracker/Logger/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1460671580344" expanded="true" signature="951:993" placeholder="select PassH... Login" />
+          </folding>
         </state>
       </provider>
     </entry>

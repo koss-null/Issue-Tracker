@@ -6,6 +6,7 @@ package com.issueTracker.Logger;
 
 import com.issueTracker.Config.*;
 import com.issueTracker.Hasher.*;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +16,8 @@ import java.sql.SQLException;
 
 public class Login {
     public static boolean CheckPass(String login, String pass) throws java.lang.ClassNotFoundException, java.sql.SQLException {
+        System.out.println("Trying to login " + login + " " + pass + " " + Coder.GetMD5Hash(pass));
+
         //driver register
         Class.forName(Config.DriverName);
 
@@ -34,7 +37,7 @@ public class Login {
             // extract data from the ResultSet
 
             while (rs.next()) {
-                if (rs.getString(1) == Coder.GetMD5Hash(pass)) {
+                if (rs.getString(1).equals(Coder.GetMD5Hash(pass))) {
                     verified = true;
                 }
             }
