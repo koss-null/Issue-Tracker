@@ -1,6 +1,24 @@
 USE IssueTrackingSystem;
 GO
 
+--If I want to create tablea again
+	DROP TABLE Employee; GO
+	DROP TABLE Class; GO
+	DROP TABLE [Prior]; GO
+	DROP TABLE Issue; GO
+	DROP TABLE Comment; GO
+	DROP TABLE [Login]; GO
+	DROP TABLE Project; GO
+	DROP TABLE AccessLevel; GO
+	DROP TABLE Groop; GO
+	DROP TABLE IssueRelationMap; GO
+	DROP TABLE ProjectIssueMap; GO
+	DROP TABLE ClassProjectMap; GO
+	DROP TABLE GroopEmployeeMap; GO
+	DROP TABLE ProjectGroopMap; GO
+	DROP TABLE LoginEmployeeMap; GO
+--end
+
 CREATE TABLE Employee (
 	ID UNIQUEIDENTIFIER NOT NULL
 		CONSTRAINT DF_Employee_rowguid DEFAULT (newid()),
@@ -74,7 +92,7 @@ CREATE TABLE [Login] (
 	ID UNIQUEIDENTIFIER NOT NULL
 		CONSTRAINT DF_Login_rowguid DEFAULT (newid()),
 		CONSTRAINT Login_ID PRIMARY KEY CLUSTERED (ID),
-	[Login] VARCHAR(100) NOT NULL,
+	LoginName VARCHAR(100) NOT NULL,
 	PassHash VARCHAR(256) NOT NULL
 )
 GO
@@ -172,5 +190,16 @@ CREATE TABLE ProjectGroopMap (
 	REFERENCES Groop(ID),
 	CONSTRAINT FK_AccessID_PGM FOREIGN KEY (AccessID)
 	REFERENCES AccessLevel(ID)
+)
+GO
+
+CREATE TABLE LoginEmployeeMap (
+	LoginID UNIQUEIDENTIFIER NOT NULL,
+	EmployeeID UNIQUEIDENTIFIER NOT NULL,
+
+	CONSTRAINT FK_Login_LEM FOREIGN KEY (LoginID)
+	REFERENCES [Login](ID),
+	CONSTRAINT FK_EmployeeID_LEM FOREIGN KEY (EmployeeID)
+	REFERENCES Employee(ID)
 )
 GO

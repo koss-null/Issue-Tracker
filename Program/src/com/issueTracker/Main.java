@@ -1,26 +1,22 @@
 package com.issueTracker;
 
 import com.issueTracker.Logger.*;
+import com.issueTracker.Register.*;
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws java.lang.ClassNotFoundException, java.sql.SQLException {
+        System.out.print("Login or register (L\\R)");
         Scanner in = new Scanner(System.in);
 
-        String login, pass;
-        System.out.print("Login: ");
-        login = in.nextLine();
-
-        System.out.print("Pass: ");
-        pass = in.nextLine();
-
-        if(Login.CheckPass(login, pass)) {
-            System.out.println("Successfully logged in");
-        } else {
-            System.out.println("Oops... Something goes wrong. Try again");
+        char ans = in.next().charAt(0);
+        if(ans == 'R') {
+            Register.Registration();
         }
 
+        Login person = new Login();
+        person.getID();
     }
 }
