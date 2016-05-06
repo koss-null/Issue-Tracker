@@ -19,16 +19,17 @@ import java.util.Scanner;
 public class Login {
     private String userID = null;
 
-    public Login() throws java.lang.ClassNotFoundException, java.sql.SQLException {
-        String login = getConfirmedLogin();
+    public Login(String login, String pass) throws java.lang.ClassNotFoundException, java.sql.SQLException {
+        if(CheckPass(login, pass)) {
 
-        PreparedStatement pstmt = DBConnector.GetConnection().prepareStatement(Config.GetIDbyLoginQuery);
-        pstmt.setString(1, login); // set input parameter
+            PreparedStatement pstmt = DBConnector.GetConnection().prepareStatement(Config.GetIDbyLoginQuery);
+            pstmt.setString(1, login); // set input parameter
 
-        ResultSet rs = Querier.MakeQuery(pstmt);
+            ResultSet rs = Querier.MakeQuery(pstmt);
 
-        if(rs.next()){
-            userID = rs.getString(1);
+            if (rs.next()) {
+                userID = rs.getString(1);
+            }
         }
     }
 
@@ -44,30 +45,6 @@ public class Login {
         }
 
         return false;
-    }
-
-    private String getConfirmedLogin() throws java.lang.ClassNotFoundException, java.sql.SQLException {
-        Scanner in = new Scanner(System.in);
-
-        String login = "", pass;
-        boolean isLogged = false;
-
-        while(!isLogged) {
-            System.out.print("Login: ");
-
-            login = in.nextLine();
-
-            System.out.print("Pass: ");
-            pass = in.nextLine();
-
-            if (Login.CheckPass(login, pass)) {
-                isLogged = true;
-            } else {
-            }
-        }
-
-        //here we have confirmed login
-        return login;
     }
 
     public String getID() {

@@ -19,10 +19,10 @@ public class DBConnector {
         //driver register
         Class.forName(Config.DriverName);
 
-        Connected = true;
-
         //getting connection
         con = DriverManager.getConnection(Config.connectionUrl);
+
+        Connected = true;
         return con;
     }
 

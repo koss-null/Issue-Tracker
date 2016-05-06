@@ -1,7 +1,7 @@
 USE IssueTrackingSystem;
 GO
 
---If I want to create tablea again
+--If I want to create tables again
 	DROP TABLE Employee; GO
 	DROP TABLE Class; GO
 	DROP TABLE [Prior]; GO

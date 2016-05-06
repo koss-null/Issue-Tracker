@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/JDBC 4.2/sqljdbc_4.0/rus/sqljdbc4.jar!/" />
       <root url="jar://$PROJECT_DIR$/JDBC 4.2/sqljdbc_4.0/rus/sqljdbc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/apache-tomcat-9.0.0.M4/lib/servlet-api.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

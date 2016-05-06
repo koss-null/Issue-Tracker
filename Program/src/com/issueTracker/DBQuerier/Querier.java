@@ -61,4 +61,49 @@ public class Querier {
         }
         return rs;
     }
+
+    public static void MakeUpdateQuery(String query) {  //do not forget to close ResultSet!!!
+        //from specification "all Statement objects will be closed when the connection that created them is closed"
+        Connection conn = null;
+
+        try {
+            conn = DBConnector.GetConnection();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(query); // create a statement
+            pstmt.executeUpdate();
+            queryCnt++;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void MakeUpdateQuery(PreparedStatement pstmt) {
+        if(queryCnt > Config.MaxConnectionNumber) {
+            try {
+                DBConnector.CloseConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Connection conn = null;
+
+        try {
+            conn = DBConnector.GetConnection();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.executeUpdate();
+            queryCnt++;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
