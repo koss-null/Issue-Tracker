@@ -1,22 +1,32 @@
 USE IssueTrackingSystem;
 GO
 
+--DROP TRIGGER ClearIssuesAfterUserDeath;
+--DROP TRIGGER ClearIssuesAfterIssueDeath;
+--DROP TRIGGER Useless;
+--DROP TRIGGER UslessInstead;
+--GO
+
 CREATE TRIGGER ClearIssuesAfterUserDeath
 ON Employee
-AFTER DELETE
+INSTEAD OF DELETE
 AS BEGIN
 DELETE FROM Issue 
    WHERE Issue.AdminID IN (SELECT ID FROM deleted)
+DELETE FROM Employee
+	WHERE Employee.ID IN (SELECT ID FROM deleted)
 END
 GO
 
 CREATE TRIGGER ClearIssuesAfterIssueDeath
 ON Issue
-AFTER DELETE
+INSTEAD OF DELETE
 AS BEGIN
 DELETE FROM Issue
    WHERE Issue.ID IN (SELECT ChildID FROM IssueRelationMap
 					  WHERE ParentID IN (SELECT ID FROM deleted))
+DELETE FROM Issue
+	WHERE Issue.ID IN (SELECT ID FROM deleted)
 END
 GO
 
@@ -30,9 +40,8 @@ GO
 
 CREATE TRIGGER UslessInstead
 ON AccessLevel
-INSTEAD OF INSERT
+AFTER DELETE
 AS BEGIN
-	INSERT INTO AccessLevel
 	 SELECT newid(), [View], Comment, MakeIssue
        FROM inserted
 END

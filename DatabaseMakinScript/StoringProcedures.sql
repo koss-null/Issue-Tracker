@@ -66,111 +66,6 @@ END
 
 GO
 
---Getting and returning parameters
-
-IF OBJECT_ID ( 'GetGroopAccessView', 'P' ) IS NOT NULL 
-    DROP PROCEDURE GetGroopAccessView;
-GO
-CREATE PROCEDURE GetGroopAccessView
-	@GroopID uniqueidentifier
-AS
-BEGIN
-	RETURN (SELECT AccessLevel.[View] FROM AccessLevel
-			WHERE AccessLevel.ID IN (SELECT Groop.ID FROM Groop) )
-END
-
-GO
-
-IF OBJECT_ID ( 'GetGroopAccessComment', 'P' ) IS NOT NULL 
-    DROP PROCEDURE GetGroopAccessComment;
-GO
-CREATE PROCEDURE GetGroopAccessComment
-	@GroopID uniqueidentifier
-AS
-BEGIN
-	RETURN (SELECT AccessLevel.Comment FROM AccessLevel
-			WHERE AccessLevel.ID IN (SELECT Groop.ID FROM Groop) )
-END
-
-GO
-
-IF OBJECT_ID ( 'GetGroopAccessMakeIssue', 'P' ) IS NOT NULL 
-    DROP PROCEDURE GetGroopAccessMakeIssue;
-GO
-CREATE PROCEDURE GetGroopAccessMakeIssue
-	@GroopID uniqueidentifier
-AS
-BEGIN
-	RETURN (SELECT AccessLevel.MakeIssue FROM AccessLevel
-			WHERE AccessLevel.ID IN (SELECT Groop.ID FROM Groop) )
-END
-
-GO
-
-IF OBJECT_ID ( 'GetProjectEmployeeAccessView', 'P' ) IS NOT NULL 
-    DROP PROCEDURE GetProjectEmployeeAccessView;
-GO
-CREATE PROCEDURE GetProjectEmployeeAccessView
-	@EmployeeID uniqueidentifier,
-	@ProjectID uniqueidentifier
-AS
-BEGIN
-	RETURN (SELECT AccessLevel.[View] FROM AccessLevel
-		INNER JOIN ProjectGroopMap ON ProjectGroopMap.AccessID = AccessLevel.ID
-			INNER JOIN Groop ON ProjectGroopMap.ProjectID = @ProjectID AND Groop.ID = ProjectGroopMap.GroopID
-				INNER JOIN GroopEmployeeMap ON Groop.ID = GroopEmployeeMap.GroopID AND GroopEmployeeMap.EmployeeID = @EmployeeID )
-END
-
-GO
-
-IF OBJECT_ID ( 'GetProjectEmployeeAccessComment', 'P' ) IS NOT NULL 
-    DROP PROCEDURE GetProjectEmployeeAccessComment;
-GO
-CREATE PROCEDURE GetProjectEmployeeAccessComment
-	@EmployeeID uniqueidentifier,
-	@ProjectID uniqueidentifier 
-AS
-BEGIN
-	RETURN (SELECT AccessLevel.Comment FROM AccessLevel
-		INNER JOIN ProjectGroopMap ON ProjectGroopMap.AccessID = AccessLevel.ID
-			INNER JOIN Groop ON ProjectGroopMap.ProjectID = @ProjectID AND Groop.ID = ProjectGroopMap.GroopID
-				INNER JOIN GroopEmployeeMap ON Groop.ID = GroopEmployeeMap.GroopID AND GroopEmployeeMap.EmployeeID = @EmployeeID )
-END
-
-GO
-
-IF OBJECT_ID ( 'GetProjectEmployeeAccessMakeIssue', 'P' ) IS NOT NULL 
-    DROP PROCEDURE GetProjectEmployeeAccessMakeIssue;
-GO
-CREATE PROCEDURE GetProjectEmployeeAccessMakeIssue
-	@EmployeeID uniqueidentifier,
-	@ProjectID uniqueidentifier 
-AS
-BEGIN
-	RETURN (SELECT AccessLevel.MakeIssue FROM AccessLevel
-		INNER JOIN ProjectGroopMap ON ProjectGroopMap.AccessID = AccessLevel.ID
-			INNER JOIN Groop ON ProjectGroopMap.ProjectID = @ProjectID AND Groop.ID = ProjectGroopMap.GroopID
-				INNER JOIN GroopEmployeeMap ON Groop.ID = GroopEmployeeMap.GroopID AND GroopEmployeeMap.EmployeeID = @EmployeeID )
-END
-
-GO
-
---IF OBJECT_ID ( 'GetIDbyLogin', 'P') IS NOT NULL
---	DROP PROCEDURE GetIDbyLogin;
---GO
-
-IF OBJECT_ID ( 'CountUsers', 'P') IS NOT NULL
-	DROP PROCEDURE CountUsers;
-GO
-CREATE PROCEDURE CountUsers
-	@Cnt INT OUTPUT
-AS
-BEGIN
-	SET @Cnt = (SELECT COUNT(ID) FROM [Login]);
-END
-
-GO
-
 IF OBJECT_ID ( 'AddUser', 'P') IS NOT NULL
 	DROP PROCEDURE AddUser;
 GO
@@ -192,3 +87,52 @@ BEGIN
 END
 
 GO
+
+IF OBJECT_ID ( 'AddIssue', 'P') IS NOT NULL
+	DROP PROCEDURE AddIssue;
+GO
+CREATE PROCEDURE AddIssue 
+						   @Name  VARCHAR(60), @Discr VARCHAR(5000), @DeadlineDate date, 
+						   @AdminID UNIQUEIDENTIFIER, @ClassID UNIQUEIDENTIFIER,
+						   @EmployeeID UNIQUEIDENTIFIER, @PriorID UNIQUEIDENTIFIER,
+						   @ProjectID UNIQUEIDENTIFIER, @ParentIssueID UNIQUEIDENTIFIER
+AS
+BEGIN
+    INSERT INTO Issue (Name, [Description], DeadlineDate, AdminID, ClassID, EmployeeID, PriorID)
+	VALUES (@Name, @Discr, @DeadlineDate, @AdminID, @ClassID, @EmployeeID, @PriorID);
+
+	IF (@ParentIssueID IS not NULL) 
+         INSERT INTO IssueRelationMap (ParentID, ChildID)
+		 VALUES (@ParentIssueID, (SELECT ID FROM Issue WHERE Issue.Name = @Name))
+
+	INSERT INTO ProjectIssueMap (ProjectID, IssueID)
+		 VALUES (@ProjectID, (SELECT ID FROM Issue WHERE Issue.Name = @Name))
+END
+
+GO
+
+--Getting and returning parameters
+IF OBJECT_ID ( 'AddProject', 'P') IS NOT NULL
+	DROP PROCEDURE AddProject;
+GO
+CREATE PROCEDURE AddProject 
+	@Name  VARCHAR(100), @Discr VARCHAR(5000), @Admin UNIQUEIDENTIFIER
+--RETURNS int	-- 1-OK, 0-Error
+AS
+BEGIN
+	DECLARE @PrjCnt int;
+	SELECT @PrjCnt = COUNT(Project.Name)
+	FROM Project WHERE @Name = Project.Name;
+	IF (@PrjCnt IS NULL) 
+        RETURN 0;
+
+    INSERT INTO Project (Name, Description, AdminID)
+	VALUES (@Name, @Discr, @Admin);
+
+	RETURN 1;
+END
+
+GO
+
+
+

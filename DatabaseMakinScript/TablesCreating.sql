@@ -2,21 +2,22 @@ USE IssueTrackingSystem;
 GO
 
 --If I want to create tables again
-	DROP TABLE Employee; GO
-	DROP TABLE Class; GO
-	DROP TABLE [Prior]; GO
-	DROP TABLE Issue; GO
-	DROP TABLE Comment; GO
-	DROP TABLE [Login]; GO
-	DROP TABLE Project; GO
-	DROP TABLE AccessLevel; GO
-	DROP TABLE Groop; GO
-	DROP TABLE IssueRelationMap; GO
-	DROP TABLE ProjectIssueMap; GO
-	DROP TABLE ClassProjectMap; GO
-	DROP TABLE GroopEmployeeMap; GO
-	DROP TABLE ProjectGroopMap; GO
-	DROP TABLE LoginEmployeeMap; GO
+--	DROP TABLE Employee;
+--	DROP TABLE Class; 
+--	DROP TABLE [Prior]; 
+--	DROP TABLE Issue; 
+--	DROP TABLE Comment; 
+--	DROP TABLE [Login]; 
+--	DROP TABLE Project; 
+--	DROP TABLE AccessLevel; 
+--	DROP TABLE Groop;
+--	DROP TABLE IssueRelationMap; 
+--	DROP TABLE ProjectIssueMap; 
+--	DROP TABLE ClassProjectMap; 
+--	DROP TABLE GroopEmployeeMap; 
+--	DROP TABLE ProjectGroopMap; 
+--	DROP TABLE LoginEmployeeMap; 
+--	GO
 --end
 
 CREATE TABLE Employee (
@@ -102,7 +103,7 @@ CREATE TABLE Project (
 		CONSTRAINT DF_Project_rowguid DEFAULT (newid()),
 		CONSTRAINT Project_ID PRIMARY KEY CLUSTERED (ID),
 	Name VARCHAR(100) NOT NULL,
-	Discription VARCHAR(5000),
+	Description VARCHAR(5000),
 	AdminID UNIQUEIDENTIFIER NOT NULL,
 
 	CONSTRAINT FK_Admin FOREIGN KEY (AdminID)
